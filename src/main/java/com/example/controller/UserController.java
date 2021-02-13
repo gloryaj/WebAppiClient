@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.demo.User;
+import com.example.demo.Clients;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,37 +20,35 @@ public class UserController {
     private UserService service;
 
     @GetMapping("/users")
-    public List<User> list() {
+    public List<Clients> list() {
         return service.listAll();
     }
 
     @PostMapping("/add")
-    public void add(User user) {
+    public void add(Clients user) {
         service.save(user);
     }
 
    // @ResponseBody
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> get(@PathVariable Integer id) {
+    public ResponseEntity<Clients> get(@PathVariable Integer id) {
         try {
-            User user = service.get(id);
-            return new ResponseEntity<User>(user, HttpStatus.OK);
+            Clients user = service.get(id);
+            return new ResponseEntity<Clients>(user, HttpStatus.OK);
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Clients>(HttpStatus.NOT_FOUND);
         }
     }
 
-
-
     //@RequestMapping(value = "/updateCliente", method = RequestMethod.PUT)
     @PutMapping("/update/{id}")
-    public ResponseEntity<User> update(@RequestBody User student, @PathVariable Integer id) {
+    public ResponseEntity<Clients> update(@RequestBody Clients student, @PathVariable Integer id) {
         try {
-            User existingUser = service.get(id);
+            Clients existingUser = service.get(id);
             service.save(existingUser);
-            return new ResponseEntity<User>(student, HttpStatus.OK);
+            return new ResponseEntity<Clients>(student, HttpStatus.OK);
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Clients>(HttpStatus.NOT_FOUND);
         }
     }
 

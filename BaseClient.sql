@@ -4,8 +4,8 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[User](
-	[id_user] int IDENTITY (1,1) PRIMARY KEY NOT NULL,
+CREATE TABLE [dbo].[Clients](
+	[users_id] int IDENTITY (1,1) PRIMARY KEY NOT NULL,
 	[name] [nvarchar](30) NOT NULL,
 	[first_name] [nchar](10) NOT NULL,
 	[second_name] [nchar](10) NOT NULL,
@@ -13,7 +13,8 @@ CREATE TABLE [dbo].[User](
 	[phone] [nchar](10) NOT NULL,
 	[second_contact] [nchar](10) NOT NULL,
 	[email] [nvarchar](30) NOT NULL,
-	[password] [nvarchar](30) NOT NULL)
+	[password] [nvarchar](30) NOT NULL,
+	time_stamp date NOT NULL)
 GO
 
 ----falta asignarle quien hizo el reporte--

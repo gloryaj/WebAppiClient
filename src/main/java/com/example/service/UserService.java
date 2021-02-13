@@ -2,7 +2,7 @@ package com.example.service;
 
 
 
-import com.example.demo.User;
+import com.example.demo.Clients;
 import com.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +17,13 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
-    public List<User> listAll() { return repository.findAll();}
+    public List<Clients> listAll() { return repository.findAll();}
 
-    public void save(User user) {
+    public void save(Clients user) {
         repository.save(user);
     }
 
-    public User get(int id) {
+    public Clients get(int id) {
         return repository.findById(id).get();
     }
 
