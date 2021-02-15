@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 
-//@RequestMapping(path= "/api/student")
+@RequestMapping(path= "/api/users")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 //@CrossOrigin //(origins = "http:localhost:4200")
 @RestController
 public class UserController {
@@ -24,19 +25,27 @@ public class UserController {
         return service.listAll();
     }
 
-    @PostMapping("/add")
-    public void add(Clients user) {
-        service.save(user);
-    }
+   // @PostMapping("/add")
+    //public void add(Clients user) { service.save(user);}
 
-   // @ResponseBody
-    @GetMapping("/users/{id}")
-    public ResponseEntity<Clients> get(@PathVariable Integer id) {
+// @ResponseBody
+   @GetMapping("/users/{id}")
+   public ResponseEntity<Clients> get(@PathVariable Integer id) {
+       try {
+           Clients user = service.get(id);
+           return new ResponseEntity<Clients>(user, HttpStatus.OK);
+       } catch (NoSuchElementException e) {
+           return new ResponseEntity<Clients>(HttpStatus.NOT_FOUND);
+       }
+   }
+
+    @RequestMapping(path = "/add", method = RequestMethod.POST)
+    public int add(Clients client) {
         try {
-            Clients user = service.get(id);
-            return new ResponseEntity<Clients>(user, HttpStatus.OK);
+            service.save(client);
+            return 1;
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<Clients>(HttpStatus.NOT_FOUND);
+            return 0;
         }
     }
 
