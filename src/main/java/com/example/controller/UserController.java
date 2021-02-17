@@ -11,18 +11,18 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 
-@RequestMapping(path= "/api/users")
+//@RequestMapping(path= "/api/users")
 //@CrossOrigin(origins = "*", allowedHeaders = "*")
-@CrossOrigin //(origins = "http:localhost:4200")
+//@CrossOrigin //(origins = "http:localhost:4200")
 @RestController
 public class UserController {
 
     @Autowired
     private UserService service;
 
-    @GetMapping
+    @GetMapping("/users")
     public List<Clients> list() {
-        return null;
+        return service.listAll();
     }
 
    // @PostMapping("/add")
