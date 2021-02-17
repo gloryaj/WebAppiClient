@@ -20,9 +20,9 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @GetMapping("/users")
+    @GetMapping
     public List<Clients> list() {
-        return service.listAll();
+        return null;
     }
 
    // @PostMapping("/add")
