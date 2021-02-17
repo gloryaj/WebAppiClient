@@ -1,4 +1,6 @@
-USE [Client]
+--USE [Client]
+USE [NGZ_client_2021]
+
 GO
 
 SET QUOTED_IDENTIFIER ON
@@ -17,7 +19,6 @@ CREATE TABLE [dbo].[Clients](
 	time_stamp date NOT NULL)
 GO
 
-----falta asignarle quien hizo el reporte--
 
 CREATE TABLE [dbo].[Issue](
 	[Description] [nvarchar](50) NOT NULL,
@@ -51,7 +52,7 @@ CREATE TABLE [dbo].[Service](
 	[EmailUser] [nvarchar](30) NOT NULL,
 	[ReportNumber] [int] NOT NULL
 	CONSTRAINT fk_ServiceEmailUser FOREIGN KEY (EmailUser)
-	REFERENCES [User] (Email), 
+	REFERENCES [Clients] (email), 
 	CONSTRAINT fk_ServiceReportNumber FOREIGN KEY (ReportNumber)
 	REFERENCES Issue (ReportNumber),
 ) 

@@ -12,8 +12,8 @@ import java.util.NoSuchElementException;
 
 
 @RequestMapping(path= "/api/users")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
-//@CrossOrigin //(origins = "http:localhost:4200")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin //(origins = "http:localhost:4200")
 @RestController
 public class UserController {
 
