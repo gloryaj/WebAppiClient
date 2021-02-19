@@ -1,9 +1,7 @@
 package com.example.service;
 
-
-
-import com.example.domain.User;
-import com.example.repository.UserRepository;
+import com.example.domain.Issue;
+import com.example.repository.IssueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,23 +10,22 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserService {
+public class IssueService {
 
     @Autowired
-    private UserRepository repository;
+    private IssueRepository repository;
 
-    public List<User> listAll() { return repository.findAll();}
+    public List<Issue> listAll() { return repository.findAll();}
 
-    public void save(User user) {
+    public void save(Issue user) {
         repository.save(user);
     }
 
-    public User get(int id) {
+    public Issue get(int id) {
         return repository.findById(id).get();
     }
 
     public void delete(int id) {
         repository.deleteById(id);
     }
-
 }

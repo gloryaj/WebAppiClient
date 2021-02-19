@@ -21,30 +21,31 @@ GO
 
 
 CREATE TABLE [dbo].[Issue](
-	[Description] [nvarchar](50) NOT NULL,
-	[ReportNumber] [int] IDENTITY(100,1) NOT NULL,
-	[RegisterTimestamp] [timestamp] NOT NULL,
-	[Address] [nvarchar](50) NOT NULL,
-	[ContactPhone] [int] NOT NULL,
-	[ContactEmail] [nvarchar](50) NOT NULL,
-	[Status] [nvarchar](50) NOT NULL,
-	[SupportUserAssigned] [nvarchar](50) NOT NULL,
- CONSTRAINT [PK_Issue] PRIMARY KEY CLUSTERED 
-(
-	[ReportNumber] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+	[report_number] [int] IDENTITY(100,1) NOT NULL PRIMARY KEY,
+	[description] [nvarchar](50) NOT NULL,
+	[users_id] int NOT NULL,
+	[register_timestamp] date NOT NULL,
+	[address] [nvarchar](50) NOT NULL,
+	[contact_phone] [int] NOT NULL,
+	[contact_email] [nvarchar](30) NOT NULL,
+	[status] [nvarchar](50) NOT NULL,
+	[support_user_assigned] [nvarchar](50) NOT NULL
+	CONSTRAINT fk_issue_user FOREIGN KEY (users_id) 
+	REFERENCES Clients (users_id)
+ )
 GO
 
 CREATE TABLE [dbo].[Comment](
-	[Id] [int] NOT NULL PRIMARY KEY IDENTITY(1,1),
-	[ReportNumber] [int] NOT NULL,
-	[Description] [nvarchar](50) NOT NULL,
-	[CommentTimestamp] [timestamp] NOT NULL
-	CONSTRAINT fk_commentIssue FOREIGN KEY (ReportNumber) 
-	REFERENCES Issue (ReportNumber) 
+	[id] [int] NOT NULL PRIMARY KEY IDENTITY(1,1),
+	[report_number] [int] NOT NULL,
+	[description] [nvarchar](50) NOT NULL,
+	[comment_timestamp] date NOT NULL
+	CONSTRAINT fk_commentIssue FOREIGN KEY (report_number) 
+	REFERENCES Issue (report_number) 
 )
 GO
+
+
 
 CREATE TABLE [dbo].[Service](
 	[Id] [int] NOT NULL PRIMARY KEY IDENTITY(1,1),

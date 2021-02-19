@@ -1,28 +1,58 @@
-package com.example.demo;
+package com.example.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
-public class Clients {
+@Table(name = "Clients")
+public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int users_id;
+
+    @Column(name = "name")
+    @NotNull
     private String name;
+    @Column(name = "first_name")
+    @NotNull
     private String first_name;
+
+    @Column(name = "second_name")
+    @NotNull
     private String second_name;
+
+    @Column(name = "address")
+    @NotNull
     private String address;
+
+    @Column(name = "phone")
+    @NotNull
     private String phone;
+
+    @Column(name = "second_contact")
+    @NotNull
     private String second_contact;
+
+    @Column(name = "email")
+    @Email
+    @NotNull
     private String email;
+
+    @Column(name = "password")
+    @NotNull
     private String password;
+
+    @Column(name = "time_stamp")
+    @NotNull
     private String time_stamp;
 
-    public Clients() {
+    public User() {
     }
 
-    public Clients(int users_id, String name, String first_name, String second_name, String address, String phone, String second_contact, String email, String password, String time_stamp) {
+    public User(int users_id, String name, String first_name, String second_name, String address, String phone, String second_contact, String email, String password, String time_stamp) {
         this.users_id = users_id;
         this.name = name;
         this.first_name = first_name;
@@ -35,8 +65,19 @@ public class Clients {
         this.time_stamp = time_stamp;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(users_id, user.users_id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(users_id);
+    }
+
     public int getUsers_id() {
         return users_id;
     }

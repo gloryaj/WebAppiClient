@@ -1,6 +1,6 @@
 package com.example.controller;
 
-import com.example.demo.Clients;
+import com.example.domain.User;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,9 +11,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 
-//@RequestMapping(path= "/api/users")
-//@CrossOrigin(origins = "*", allowedHeaders = "*")
-//@CrossOrigin //(origins = "http:localhost:4200")
+//@RequestMapping(path= "/users")
+//@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+//EnableCors(origins: "http://mywebclient.azurewebsites.net", headers: "*", methods: "*")
+//@CrossOrigin (origins = "http:localhost:4200")
 @RestController
 public class UserController {
 
@@ -21,26 +22,26 @@ public class UserController {
     private UserService service;
 
     @GetMapping("/users")
-    public List<Clients> list() {
+    public List<User> list() {
         return service.listAll();
     }
 
    // @PostMapping("/add")
-    //public void add(Clients user) { service.save(user);}
+    //public void add(User user) { service.save(user);}
 
 // @ResponseBody
    @GetMapping("/users/{id}")
-   public ResponseEntity<Clients> get(@PathVariable Integer id) {
+   public ResponseEntity<User> get(@PathVariable Integer id) {
        try {
-           Clients user = service.get(id);
-           return new ResponseEntity<Clients>(user, HttpStatus.OK);
+           User user = service.get(id);
+           return new ResponseEntity<User>(user, HttpStatus.OK);
        } catch (NoSuchElementException e) {
-           return new ResponseEntity<Clients>(HttpStatus.NOT_FOUND);
+           return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
        }
    }
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
-    public int add(Clients client) {
+    public int add(User client) {
         try {
             service.save(client);
             return 1;
@@ -51,13 +52,13 @@ public class UserController {
 
     //@RequestMapping(value = "/updateCliente", method = RequestMethod.PUT)
     @PutMapping("/update/{id}")
-    public ResponseEntity<Clients> update(@RequestBody Clients student, @PathVariable Integer id) {
+    public ResponseEntity<User> update(@RequestBody User student, @PathVariable Integer id) {
         try {
-            Clients existingUser = service.get(id);
+            User existingUser = service.get(id);
             service.save(existingUser);
-            return new ResponseEntity<Clients>(student, HttpStatus.OK);
+            return new ResponseEntity<User>(student, HttpStatus.OK);
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<Clients>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
     }
 
